@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GTG 교과센터 · 기억의 과학과 우리 수업</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{ --red:#E11B1B; --green:#2EA12E; --blue:#1C9FE0; --navy:#3A40B5; --ink:#1d2228; --muted:#5b6470; --line:#e4e8ec; }
+  *{ box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  
+  body{ font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; color:var(--ink); background:#f4f6f9; line-height:1.75; -webkit-text-size-adjust:none; }
+
+  /* PC 상단 툴바 */
+  .toolbar{ max-width:760px; margin:14px auto 0; display:flex; justify-content:space-between; align-items:center; font-size:14px; color:var(--muted); padding:0 16px; }
+  .print-btn{ border:0; background:var(--navy); color:#fff; font-weight:700; font-size:14px; padding:10px 18px; border-radius:8px; cursor:pointer; font-family:inherit; }
+
+  /* 메인 컨테이너 */
+  .container { max-width:760px; margin:0 auto; padding:16px; }
+
+  /* 개별 섹션 카드 */
+  .page{ background:#fff; padding:36px 28px; border-radius:16px; box-shadow:0 4px 18px rgba(0,0,0,.04); display:flex; flex-direction:column; margin-bottom:24px; border-top:6px solid var(--c, var(--blue)); }
+
+  .brandrow{ display:flex; justify-content:space-between; align-items:center; padding-bottom:14px; border-bottom:1px solid var(--line); }
+  .wm{ font-family:Georgia,'Times New Roman',serif; font-weight:700; font-size:15pt; }
+  .wm .r{color:var(--red);} .wm .g{color:var(--green);} .wm .b{color:var(--blue);}
+  .wm small{ font-family:Georgia,serif; color:var(--navy); font-size:10.5pt; margin-left:5px; font-weight:600; }
+  .idx{ font-size:10.5pt; color:var(--muted); font-weight:600; }
+
+  .eyebrow{ color:var(--c,var(--blue)); font-weight:800; font-size:11.5pt; letter-spacing:0.5px; margin-top:18px; text-transform:uppercase; }
+  .title{ font-size:23pt; font-weight:900; letter-spacing:-1px; margin-top:8px; line-height:1.3; color:#0f1419; }
+  .intro{ font-size:13pt; color:#2c333a; margin-top:14px; line-height:1.75; word-break:keep-all; font-weight:500; }
+
+  h2{ font-size:15pt; font-weight:800; margin-top:24px; padding-left:12px; border-left:5px solid var(--c,var(--blue)); color:#0f1419; }
+  .sec p{ font-size:12.5pt; color:#2c333a; margin-top:10px; line-height:1.75; word-break:keep-all; }
+  b{ color:#000; font-weight:700; } 
+  .hl{ color:var(--c,var(--blue)); font-weight:800; }
+
+  /* 그래프 영역 반응형 */
+  .chart{ margin:22px auto 8px; width:100%; max-width:540px; background:#fafbfc; padding:16px; border-radius:12px; border:1px solid #f0f2f5; }
+  .chart svg{ width:100%; height:auto; display:block; }
+  .cap{ text-align:center; font-size:10.5pt; color:var(--muted); margin-top:10px; line-height:1.4; word-break:keep-all; }
+  .legend{ display:flex; gap:18px; justify-content:center; font-size:10.5pt; color:var(--muted); margin-top:10px; flex-wrap:wrap; }
+  .legend span { display:flex; align-items:center; }
+  .legend i{ display:inline-block; width:18px; height:11px; border-radius:2px; margin-right:6px; }
+  .legend .ln{ height:0; border-top:3px dashed #b3bcc4; border-radius:0; }
+  .legend .lb{ height:0; border-top:4px solid var(--blue); border-radius:0; }
+
+  /* 인포박스 */
+  .callout{ margin-top:20px; padding:20px 22px; border-radius:12px;
+            background:color-mix(in srgb, var(--c,var(--blue)) 7%, #fff); border:1px solid color-mix(in srgb, var(--c,var(--blue)) 22%, #fff); border-left:5px solid var(--c,var(--blue)); }
+  .callout p{ font-size:12pt; color:#1e272f; line-height:1.75; word-break:keep-all; }
+  .callout b{ color:var(--c,var(--blue)); }
+
+  /* 매핑 그래픽 구조 */
+  .map{ margin-top:20px; display:flex; flex-direction:column; gap:14px; }
+  .mrow{ display:flex; gap:16px; align-items:flex-start; border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:#fff; }
+  .mrow .k{ flex:0 0 105px; font-weight:800; font-size:13pt; color:#0f1419; line-height:1.3; }
+  .mrow .k .sci{ display:block; font-size:9.5pt; font-weight:700; color:var(--blue); margin-top:4px; }
+  .mrow .d{ font-size:11.5pt; color:#2c333a; line-height:1.65; word-break:keep-all; }
+
+  .foot{ margin-top:24px; padding-top:14px; border-top:1px solid var(--line); display:flex; justify-content:space-between; font-size:10pt; color:var(--muted); font-weight:500; }
+  .bridge{ margin-top:22px; font-size:12.5pt; font-weight:700; color:var(--navy); text-align:center; background:#eceef7; padding:12px; border-radius:8px; }
+
+  /* 하단 메시지 박스 (마무리 — 강조형) */
+  .closing-box { position:relative; overflow:hidden; background:linear-gradient(135deg, #2c3296 0%, #3A40B5 60%, #2f7fd6 130%); color:#fff; padding:38px 34px; border-radius:18px; margin-top:14px; box-shadow:0 14px 34px rgba(58,64,181,.30); }
+  .closing-box::before { content:""; position:absolute; left:0; top:0; width:100%; height:6px; background:linear-gradient(90deg, var(--red) 0 33.34%, var(--green) 33.34% 66.67%, var(--blue) 66.67% 100%); }
+  .closing-box .ttl { font-size:16pt; font-weight:900; letter-spacing:-.6px; line-height:1.35; margin-bottom:16px; }
+  .closing-box .ttl .em { color:#7fdfff; }
+  .closing-box p { font-size:12.5pt; color:#e9eeff; line-height:1.85; word-break:keep-all; margin-bottom:12px; font-weight:500; }
+  .closing-box p:last-child { margin-bottom:0; }
+  .closing-box b { color:#fff; font-weight:800; }
+
+  /* 💻 PC 브라우저 전용 인쇄 스타일 규격 고정 */
+  @media print{
+    body{ background:#fff; }
+    .toolbar{ display:none; }
+    .container { max-width:210mm; padding:0; margin:0; }
+    .page{ width:210mm; min-height:297mm; margin:0 0 15mm 0; padding:16mm 16mm; box-shadow:none; border-radius:0; border-top:none; border-left:6px solid var(--c, var(--blue)); break-after:page; }
+    .page:last-child{ break-after:auto; }
+    .chart{ background:transparent; border:none; }
+    .closing-box { break-inside:avoid; box-shadow:none; margin-top:14px; }
+    @page{ size:A4; margin:15mm 12mm; }
+  }
+
+  /* 📱 스마트폰 화면 전용 미디어 쿼리 */
+  @media screen and (max-width: 600px) {
+    .toolbar { display:none; }
+    .container { padding:10px; }
+    .page { padding:24px 18px; border-radius:12px; margin-bottom:16px; }
+    .title { font-size:19pt; line-height:1.35; }
+    .intro { font-size:11.5pt; margin-top:12px; }
+    h2 { font-size:13.5pt; margin-top:18px; }
+    .sec p { font-size:11.5pt; line-height:1.7; }
+    .callout { padding:16px; margin-top:14px; }
+    .callout p { font-size:11pt; }
+    .mrow { gap:8px; padding:14px; }
+    .mrow .k { font-size:12pt; }
+    .mrow .k .sci { margin-top:2px; font-size:8.5pt; }
+    .mrow .d { font-size:11pt; }
+    .chart { padding:10px; margin-top:14px; }
+    .closing-box { padding:24px 18px; }
+    .closing-box p { font-size:11.5pt; line-height:1.75; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <span>📱 본 페이지는 글씨 크기가 확대된 모바일 가독성 강화 버전(재원생 배포용)입니다.</span>
+    <button class="print-btn" onclick="window.print()">PC 레이아웃 인쇄 / PDF</button>
+  </div>
+
+  <div class="container">
+
+    <div class="page" style="--c:var(--blue)">
+      <div class="brandrow"><div class="wm"><span class="r">G</span>ood <span class="g">T</span>o <span class="b">G</span>reat <small>교과센터</small></div><div class="idx">기억의 과학 · 1부 ①</div></div>
+      <div class="eyebrow">기억의 과학 ① · 분산 학습 (Spaced Repetition)</div>
+      <div class="title">열심히 공부했는데,<br>왜 돌아서면 까먹을까요?</div>
+      <p class="intro">사람의 뇌는 원래 <b>잊도록</b> 만들어져 있습니다. 한 번 배운 것을 그대로 두면, 생각보다 빠르게 사라집니다. 아이가 게을러서가 아니라, 뇌가 원래 그렇습니다.</p>
+
+      <div class="sec"><h2>하루만 지나도 절반은 사라집니다</h2>
+        <p>복습하지 않으면 <b>하루 만에 배운 내용의 50% 이상</b>을 잊습니다(아래 회색 점선, ‘망각곡선’). 그런데 <b>완전히 잊기 직전, 뇌가 가물가물할 때 다시 한 번 꺼내어 채워주면</b> 기억은 다시 차오르고, 다음엔 더 천천히 잊힙니다. 이 과정을 과학적인 주기로 몇 번 반복하면 기억은 거의 사라지지 않는 <b>장기 기억</b>으로 전환됩니다.</p>
+      </div>
+
+      <div class="chart">
+        <svg viewBox="0 0 580 240" xmlns="http://www.w3.org/2000/svg">
+          <line x1="58" y1="26" x2="58" y2="196" stroke="#c7ced4" stroke-width="2"/>
+          <line x1="58" y1="196" x2="552" y2="196" stroke="#c7ced4" stroke-width="2"/>
+          <text x="22" y="115" font-size="12.5" fill="#5b6470" transform="rotate(-90 22 115)">기억</text>
+          <text x="520" y="216" font-size="12.5" fill="#5b6470">시간 →</text>
+          <path d="M58,36 C95,128 150,174 235,186 C330,194 445,192 552,191" fill="none" stroke="#b3bcc4" stroke-width="3" stroke-dasharray="6 6"/>
+          <path d="M58,36 C80,66 105,88 126,100 L126,40 C158,62 196,78 226,88 L226,38 C262,56 312,66 346,75 L346,36 C392,50 436,56 470,62 L470,34 C502,38 524,41 552,43" fill="none" stroke="#1C9FE0" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="126" cy="40" r="5" fill="#1C9FE0"/><circle cx="226" cy="38" r="5" fill="#1C9FE0"/><circle cx="346" cy="36" r="5" fill="#1C9FE0"/><circle cx="470" cy="34" r="5" fill="#1C9FE0"/>
+          <text x="116" y="26" font-size="10.5" fill="#1C9FE0">다시 떠올림</text>
+        </svg>
+        <div class="legend"><span><i class="ln"></i>복습 안 하면 (망각곡선)</span><span><i class="lb"></i>잊을 때쯤 복습 (분산 학습)</span></div>
+      </div>
+
+      <div class="callout"><p>이렇게 <b>과학적으로 설계된 간격을 두고 다시 떠올리는 것</b>을 학습과학에서 ‘분산 학습(Spaced Repetition)’이라고 합니다. 한 번에 몰아서 보는 ‘벼락치기’와는 정반대의 길입니다.</p></div>
+      <div class="foot"><span>GTG 교과센터</span><span>기억의 과학 · 1부 ①</span></div>
+    </div>
+
+    <div class="page" style="--c:var(--green)">
+      <div class="brandrow"><div class="wm"><span class="r">G</span>ood <span class="g">T</span>o <span class="b">G</span>reat <small>교과센터</small></div><div class="idx">기억의 과학 · 1부 ②</div></div>
+      <div class="eyebrow">기억의 과학 ② · 능동 인출 (Active Recall)</div>
+      <div class="title">‘다시 읽기’는,<br>안다는 <span class="hl">착각</span>을 줍니다.</div>
+      <p class="intro">인지과학이 증명한 유명한 실험이 있습니다. 같은 내용을 공부한 뒤, 한 그룹은 <b>다시 읽게</b> 하고 다른 그룹은 <b>시험(스스로 풀기)</b>을 보게 했습니다. 그리고 두 그룹 모두에게 얼마나 기억할지 물었죠.</p>
+
+      <div class="chart">
+        <svg viewBox="0 0 580 250" xmlns="http://www.w3.org/2000/svg">
+          <line x1="58" y1="30" x2="58" y2="205" stroke="#c7ced4" stroke-width="2"/>
+          <line x1="58" y1="205" x2="552" y2="205" stroke="#c7ced4" stroke-width="2"/>
+          <rect x="120" y="73" width="52" height="132" fill="#b9c0c7"/>
+          <rect x="180" y="134" width="52" height="71" fill="#1C9FE0"/>
+          <text x="146" y="66" font-size="13" fill="#5b6470" text-anchor="middle" font-weight="700">높음</text>
+          <text x="206" y="127" font-size="13" fill="#1C9FE0" text-anchor="middle" font-weight="800">낮음</text>
+          <text x="176" y="224" font-size="12.5" fill="#1d2228" text-anchor="middle" font-weight="700">다시 읽기</text>
+          <path d="M250,76 C272,90 272,120 250,131" fill="none" stroke="#E11B1B" stroke-width="2"/>
+          <text x="282" y="100" font-size="11.5" fill="#E11B1B" font-weight="800">안다고<tspan x="282" dy="15">착각!</tspan></text>
+          <rect x="360" y="106" width="52" height="99" fill="#b9c0c7"/>
+          <rect x="420" y="110" width="52" height="95" fill="#1C9FE0"/>
+          <text x="386" y="99" font-size="13" fill="#5b6470" text-anchor="middle" font-weight="700">보통</text>
+          <text x="446" y="103" font-size="13" fill="#1C9FE0" text-anchor="middle" font-weight="800">높음</text>
+          <text x="416" y="224" font-size="12.5" fill="#1d2228" text-anchor="middle" font-weight="700">다시 풀기 (시험)</text>
+        </svg>
+        <div class="cap">일주일 후 결과 — 눈으로 다시 읽은 그룹은 자신만만했지만 실제론 훨씬 많이 잊었습니다.</div>
+        <div class="legend"><span><i style="background:#b9c0c7"></i>안다고 느낀 정도(예상)</span><span><i style="background:#1C9FE0"></i>1주 후 실제 점수</span></div>
+      </div>
+
+      <div class="sec"><p>결과는 완전히 반대였습니다. <b>다시 읽은 그룹은 “잘 안다”고 자만했지만 실제 점수는 낮았고, 시험을 본 그룹은 덜 자신해 했지만 실제 점수는 월등히 높았습니다.</b></p>
+        <p>눈으로 교재를 다시 읽으면 글자가 눈에 <b>익숙</b>해져서 다 안다고 착각하기 쉽습니다. 하지만 진짜 실력은 힘들게 <b>머릿속에서 개념을 끄집어내어 스스로 풀어낼 때(Active Recall, 능동 인출)</b> 완성됩니다.</p>
+      </div>
+      <div class="foot"><span>GTG 교과센터</span><span>기억의 과학 · 1부 ②</span></div>
+    </div>
+
+    <div class="page" style="--c:var(--navy)">
+      <div class="brandrow"><div class="wm"><span class="r">G</span>ood <span class="g">T</span>o <span class="b">G</span>reat <small>교과센터</small></div><div class="idx">기억의 과학 · 1부 ③</div></div>
+      <div class="eyebrow">기억의 과학 ③ · 시간차 회상 (Spaced Retrieval)</div>
+      <div class="title">이 두 가지 과학을 합친 것이,<br>바로 <span class="hl">‘시간차 회상’</span>입니다.</div>
+      <p class="intro">앞의 두 가지 핵심 과학 원리인 —</p>
+      <div class="map">
+        <div class="mrow" style="--c:var(--blue)"><div class="k">① 분산 학습<span class="sci">Spaced Repetition</span></div><div class="d">잊을 때쯤 그 문제를 시스템을 통해 <b>다시</b> 만나고,</div></div>
+        <div class="mrow" style="--c:var(--green)"><div class="k">② 능동 인출<span class="sci">Active Recall</span></div><div class="d">해설을 그냥 보거나 다시 ‘읽지’ 않고, 힘들게 스스로 <b>풀어서</b> 기억을 꺼냅니다.</div></div>
+      </div>
+      <p class="sec" style="margin-top:14px;">이 원리들이 결합하면, 인지과학이 밝혀낸 가장 강력한 장기 기억 공부법이 됩니다. 저희는 이를 <b>‘시간차 회상(Spaced Retrieval)’</b>이라 부르고 수업의 뼈대로 삼았습니다.</p>
+
+      <div class="callout"><p>여기에 하나 더 — <b>실전 응용력을 기르는 ‘인터리빙(교차 학습)’</b>이 결합합니다. 한 단원만 주구장창 풀지 않고 여러 단원의 문제를 정교하게 섞어 출제합니다. 아이가 문제를 마주했을 때 <b>"이 문제를 풀려면 어떤 개념을 꺼내 써야 하지?"</b>를 스스로 판단하게 만들어 실제 시험장에서 힘을 발휘합니다.</p></div>
+      <div class="foot"><span>GTG 교과센터</span><span>기억의 과학 · 1부 ③</span></div>
+    </div>
+
+    <div class="page" style="--c:var(--red)">
+      <div class="brandrow"><div class="wm"><span class="r">G</span>ood <span class="g">T</span>o <span class="b">G</span>reat <small>교과센터</small></div><div class="idx">우리 수업 · 2부 ①</div></div>
+      <div class="eyebrow">우리 수업 · 평상시 시스템</div>
+      <div class="title">이 과학을, <span class="hl">매일</span> 실천합니다.</div>
+      <p class="intro">GTG 교과센터의 수업은 앞의 과학을 단순한 서류상 ‘이론’으로 두지 않습니다. 이 원리를 완벽하게 자동화한 <b>자체 학습 프로그램 시스템을 직접 개발</b>하여, 매일 수업에서 빈틈없이 운영합니다.</p>
+
+      <div class="sec"><h2>평상시 — 배운 곳부터 지금 진도까지 '누적테스트'</h2>
+        <p>누적테스트의 범위는 <b>‘과거에 배운 첫 단원’부터 ‘지금 나가는 진도’까지 전 범위</b>입니다. 예를 들어 중등 과정을 배우는 초등학생(5학년)이라면, <b>초등 5학년 과정부터 현재 배우는 중등 분량까지</b>가 매 수업 다시 떠올려야 하는 범위가 됩니다. 새 진도를 나가면서도 지나온 모든 과정을 동시에 붙잡아 둡니다.</p>
+      </div>
+      <div class="callout">
+        <p>중등 수학은 1학기(대수)와 2학기(기하)의 성격이 완전히 다릅니다. 보통은 2학기 도형을 배우는 동안 1학기 연산/방정식을 다 잊어버리지만, GTG 아이들은 매일 진행되는 누적테스트 덕분에 오히려 1학기의 이해도가 더 단단해진 채 다음 학년으로 올라갑니다. 분량이 방대한 <b>고등 수학 과정</b>에서는 이 '누적'의 힘이 곧 압도적인 무기가 됩니다.</p>
+      </div>
+      <div class="callout" style="--c:var(--navy)">
+        <p>단순히 이름만 같은 일반 누적테스트가 아닙니다. <b>시중의 흔한 누적테스트</b>는 반 전체가 <b>똑같은 시험지</b>를 풉니다. 하지만 아이마다 막히는 문제와 잊어버리는 주기, 오답의 구멍은 전부 다릅니다. GTG는 정밀한 시스템 데이터를 기반으로, <b>오직 그 아이의 취약점에 딱 맞춘 단 하나의 시험지</b>를 제공합니다. 진도는 같아도 시험지는 완전히 다릅니다 — <b>30명, 30개의 시험지.</b></p>
+      </div>
+      <div class="foot"><span>GTG 교과센터</span><span>우리 수업 · 2부 ①</span></div>
+    </div>
+
+    <div class="page" style="--c:var(--navy)">
+      <div class="brandrow"><div class="wm"><span class="r">G</span>ood <span class="g">T</span>o <span class="b">G</span>reat <small>교과센터</small></div><div class="idx">우리 수업 · 2부 ②</div></div>
+      <div class="eyebrow">우리 수업 · 시험기간</div>
+      <div class="title">시험기간엔, <span class="hl">범위를 좁혀</span> 집중합니다.</div>
+      <p class="intro">시험기간이 되면 프로그램에 <b>해당 내신 시험 범위만 정밀하게 좁혀 설정</b>하여, 짧은 기간 동안 해당 범위를 집중적으로 여러 번 떠올려 풀도록 전환합니다. 그 결과 두 가지가 완전히 달라집니다.</p>
+
+      <div class="sec"><h2>① “이거 안 배웠어요”가 완벽하게 사라집니다</h2>
+        <p>아이가 시험을 보고 와서 안 배웠다고 하는 것은 거짓말이 아닙니다. 한 번만 보고 지나가서 <b>기억의 흔적이 약해져 처음 본다고 착각하는 메타인지의 오류</b>입니다. GTG 시스템으로 시험 범위를 좁혀 간격 반복을 돌리면 <b>"이건 내가 다뤄봤던 문제"</b>라는 확신이 뇌에 새겨집니다. 틀리더라도 내가 어디가 부족한지 정확히 아는 진짜 메타인지가 확립됩니다.</p>
+      </div>
+      <div class="sec"><h2>② 아이가 가진 잠재력의 '최대 점수'를 뽑아냅니다</h2>
+        <p>모든 아이가 당장 100점을 맞을 수는 없을지라도, 약한 유형부터 시스템이 끈질기게 다시 풀게 하기 때문에 '아는데 아깝게 틀리는 문제', '다지지 않아서 놓치는 문제'는 완벽하게 필터링하여 메웁니다. 결국 남는 결과는 <b>그 아이가 현재 발휘할 수 있는 실력의 100% 최댓값</b>입니다.</p>
+      </div>
+      <div class="callout" style="--c:var(--blue)"><p>한 번 배운 개념이 실제 시험장 안에서도 살아 움직이는 <b>‘결코 까먹지 않는 진짜 실력’</b>이 되도록 만드는 것 — 그것이 저희가 매일 누적테스트 시스템을 고집하는 이유입니다.</p></div>
+      <div class="foot"><span>GTG 교과센터</span><span>우리 수업 · 2부 ②</span></div>
+    </div>
+
+    <div class="closing-box">
+      <div class="ttl">빨리 나가는 수학이 아니라, <span class="em">남는 수학</span></div>
+      <p>단순히 눈앞의 진도만 빨리 나가는 수학은 아이의 뇌 속에 남지 않는 모래성과 같습니다. GTG 교과센터는 <b>아이들이 흘리고 지나가는 단 하나의 오답 구멍까지 데이터로 추적하고 완벽히 장기 기억화</b>하기 위해 이 정교한 학습 시스템을 운영하고 있습니다.</p>
+      <p>우리 아이들의 소중한 학습 데이터가 쌓여 갈수록, 시스템은 더욱 정교하게 아이만을 위한 최적의 학습 경로를 짚어낼 것입니다.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
