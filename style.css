@@ -179,6 +179,24 @@ a{color:inherit}
 .graph figcaption{display:flex;flex-wrap:wrap;gap:.3rem 1.3rem;margin-top:.7rem;font-size:.86rem;color:var(--muted)}
 .graph .k{display:inline-block;width:1.5rem;height:0;border-top:2px dashed #a9a297;vertical-align:middle;margin-right:.45rem}
 .graph .k.pen{border-top:2.5px solid var(--pen)}
+@media (max-width:560px){ .graph .ax{font-size:21px} .graph .hn{font-size:30px} }
+
+/* 막대 그래프 (글자+막대) — 예상은 빗금, 실제는 빨간 펜 */
+.bars .grp{margin:.2rem 0 1.3rem}
+.bars .grp:last-of-type{margin-bottom:.4rem}
+.bars .grp-t{display:block;color:var(--ink);font-weight:700;font-size:1rem;margin-bottom:.35rem}
+.bars .brow{display:grid;grid-template-columns:2.4rem 1fr;align-items:center;gap:.5rem;margin:.3rem 0}
+.bars .lbl{font-size:.85rem;color:var(--muted)}
+.bars .track{position:relative;height:1.7rem}
+.bars .bar{position:absolute;left:0;top:.25rem;bottom:.25rem;width:var(--w)}
+.bars .bar.est{background:repeating-linear-gradient(135deg,#bdb4a6 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1.5px #bdb4a6}
+.bars .bar.act{background:var(--pen)}
+.bars .v{position:absolute;top:50%;left:calc(var(--w) + .55rem);transform:translateY(-50%);font-size:.85rem;font-weight:600;color:var(--ink-2);white-space:nowrap}
+.bars .v.pen{color:var(--pen)}
+.bars .gap{position:absolute;top:50%;left:calc(var(--w) + 3.3rem);transform:translateY(-55%) rotate(-3deg);font-family:var(--hand);font-style:normal;font-size:1.45rem;color:var(--pen);white-space:nowrap}
+.graph .k.box{width:1.15rem;height:.8rem;border-top:0;vertical-align:-1px}
+.graph .k.box.hatch{background:repeating-linear-gradient(135deg,#bdb4a6 0 2px,transparent 2px 5px);box-shadow:inset 0 0 0 1.5px #bdb4a6}
+.graph .k.box.pen{background:var(--pen)}
 .figure-slot{
   margin:1.6rem 0 2rem;min-height:12rem;display:flex;align-items:center;justify-content:center;
   border:1px solid var(--rule);color:var(--muted);font-size:.9rem;
