@@ -1,0 +1,197 @@
+/* GTG 교과센터 · 누적테스트 미니사이트 — 공통 스타일
+   방향: 시험지와 빨간 펜. 종이 질감 + 명조 제목 + 채점하듯 그은 빨간 펜 표시 */
+
+:root{
+  --paper:#f6f2ea;
+  --card:#fffdf8;
+  --ink:#221f1b;
+  --ink-2:#47423c;
+  --muted:#8b8378;
+  --rule:#ddd4c4;
+  --grid:rgba(38,92,150,.11);
+  --pen:#E11B1B;
+  --navy:#3A40B5;
+  --g:#2EA12E;
+  --b:#1C9FE0;
+  --serif:'Hahmlet','Noto Serif KR','AppleMyungjo',serif;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --hand:'Nanum Pen Script',cursive;
+  --measure:40rem;
+  --gutter:11rem;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .13 0 0 0 0 .12 0 0 0 0 .1 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color:var(--ink-2);
+  font-family:var(--sans);
+  font-size:1.0625rem;
+  line-height:1.8;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+::selection{background:rgba(225,27,27,.16)}
+:focus-visible{outline:2px dashed var(--pen);outline-offset:3px}
+
+.page{max-width:66rem;margin:0 auto;padding:0 1.25rem}
+
+/* ── 머리: 로고 + 메뉴 (아래 이중선은 시험지 머리) ── */
+.masthead{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.7rem 1.25rem;
+  padding:1.4rem 0 .8rem;border-bottom:3px double var(--ink);
+}
+.wordmark{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:.01em;white-space:nowrap}
+.wordmark .r{color:var(--pen)} .wordmark .g{color:var(--g)} .wordmark .b{color:var(--b)}
+.wordmark small{font-family:var(--sans);font-size:.72rem;font-weight:600;color:var(--navy);margin-left:.35rem;letter-spacing:.02em}
+
+.nav{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem 1.25rem;font-size:.95rem;margin-left:auto}
+.nav a{color:var(--ink-2);text-decoration:none;white-space:nowrap;padding:.1rem 0 .35rem}
+.nav a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--pen);text-decoration-thickness:2px;text-underline-offset:6px}
+/* 지금 보는 페이지: 빨간 펜 밑줄 */
+.nav a[aria-current="page"]{
+  color:var(--ink);font-weight:700;text-decoration:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6c18-3 34 2 50-1s30 2 46-2' fill='none' stroke='%23E11B1B' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 100%/100% .55em;
+}
+/* 신청: 메뉴 끝의 빨간 글씨 (폰에선 로고 오른쪽 위로) */
+.nav-apply{color:var(--pen);font-weight:700;font-size:.95rem;white-space:nowrap;text-decoration:none;padding:.1rem 0 .35rem}
+.nav-apply:hover{text-decoration:underline;text-decoration-color:var(--pen);text-decoration-thickness:2px;text-underline-offset:6px}
+@media (max-width:640px){
+  .masthead{gap:.55rem 1rem}
+  .nav-apply{order:2;margin-left:auto}
+  .nav{order:3;flex-basis:100%;margin-left:0;gap:.3rem .8rem;font-size:.9rem}
+}
+
+/* ── 본문 그리드: 왼쪽 여백(빨간 펜 메모) + 본문 ── */
+.row{display:grid;grid-template-columns:minmax(0,1fr);margin-top:4rem}
+.row>*{grid-column:1}
+.note{margin:0 0 .5rem}
+@media (min-width:900px){
+  .row{grid-template-columns:var(--gutter) minmax(0,var(--measure));column-gap:2.75rem;margin-top:5.5rem}
+  .row>*{grid-column:2}
+  .row>.note{grid-column:1;grid-row:1 / span 3;text-align:right;margin:.7rem 0 0}
+}
+
+/* 빨간 펜 손글씨 메모 */
+.hand{font-family:var(--hand);color:var(--pen);font-size:1.7rem;line-height:1.05;font-weight:400;transform:rotate(-3deg);transform-origin:left center}
+@media (min-width:900px){ .hand{transform-origin:right center} }
+
+/* ── 첫 화면 ── */
+.hero{margin-top:3rem}
+.headline{
+  font-family:var(--serif);font-weight:800;color:var(--ink);
+  font-size:clamp(2.5rem,9vw,4.4rem);line-height:1.12;letter-spacing:-.025em;
+  margin:.2rem 0 1.2rem;
+}
+.lede{font-size:1.18rem;line-height:1.7;color:var(--ink-2);max-width:30rem;margin:0}
+
+/* 단어에 빨간 펜 동그라미 (불러올 때 그려짐) */
+.circled{position:relative;display:inline-block;white-space:nowrap}
+.circled svg{position:absolute;left:-.36em;top:-.3em;width:calc(100% + .74em);height:calc(100% + .58em);overflow:visible;pointer-events:none}
+.circled path{
+  fill:none;stroke:var(--pen);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1;stroke-dashoffset:1;
+  animation:draw 1.15s .45s cubic-bezier(.65,.05,.35,1) forwards;
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* 버튼: 인쇄물처럼 빨간 그림자가 어긋나 찍힌 느낌 */
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.4rem;margin-top:2rem}
+.btn{
+  display:inline-block;padding:.85rem 1.35rem;background:var(--ink);color:var(--paper);
+  border:1.5px solid var(--ink);font-weight:700;text-decoration:none;
+  box-shadow:4px 4px 0 var(--pen);transition:transform .15s ease,box-shadow .15s ease;
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--pen)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--pen)}
+.btn-text{font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-color:var(--pen);text-decoration-thickness:2px;text-underline-offset:6px}
+
+/* ── 섹션 제목 ── */
+.row h2{font-family:var(--serif);font-weight:700;color:var(--ink);font-size:clamp(1.55rem,5vw,2rem);letter-spacing:-.015em;line-height:1.3;margin:0 0 1.2rem}
+
+/* ── 빨간 펜 체크 목록 ── */
+.checks{list-style:none;margin:0;padding:0}
+.checks li{position:relative;padding:0 0 0 2.5rem;margin:0 0 1.4rem}
+.checks li::before{
+  content:"";position:absolute;left:0;top:.2em;width:1.75rem;height:1.5rem;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 28'%3E%3Cpath d='M3 16c3 2 6 5 9 9 4-9 11-17 19-22' fill='none' stroke='%23E11B1B' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+.checks strong{display:block;color:var(--ink);font-weight:700}
+.side{display:block;font-family:var(--hand);color:var(--pen);font-size:1.45rem;line-height:1.1;margin-top:.2rem}
+@media (min-width:900px){
+  .side{position:absolute;right:calc(100% + 2.75rem);top:.1em;width:var(--gutter);text-align:right;margin:0;transform:rotate(-4deg)}
+}
+
+/* ── 숫자 (모눈종이) ── */
+.figures{
+  display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);
+  background-color:#fbfaf5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;background-position:-1px -1px;
+}
+.fig{padding:1.6rem 1.3rem 1.4rem}
+.fig+.fig{border-left:1px solid var(--rule)}
+.num{display:block;font-family:var(--serif);font-weight:800;color:var(--ink);font-size:clamp(2.6rem,11vw,4.4rem);line-height:1;letter-spacing:-.035em}
+.fig span{display:block;margin-top:.7rem;font-size:.95rem;line-height:1.5;color:var(--ink-2)}
+@media (max-width:420px){ .figures{grid-template-columns:1fr} .fig+.fig{border-left:0;border-top:1px solid var(--rule)} }
+
+/* ── 모집 안내 (접수증처럼 이중 테두리 + 도장) ── */
+.notice{
+  position:relative;background:var(--card);margin:5px;
+  border:1.5px solid var(--ink);outline:1px solid var(--ink);outline-offset:5px;
+  padding:2.1rem 1.5rem 1.8rem;
+}
+.notice h2{margin-bottom:1rem;padding-right:5.5rem}
+.stamp{
+  position:absolute;top:1.15rem;right:1rem;
+  color:var(--pen);font-weight:800;font-size:.95rem;letter-spacing:.12em;
+  padding:.35rem .7rem .3rem;border:2.5px solid var(--pen);border-radius:5px;
+  box-shadow:inset 0 0 0 2px var(--card),inset 0 0 0 3.5px var(--pen);
+  transform:rotate(9deg);opacity:.88;
+}
+.facts{margin:0 0 .5rem}
+.facts div{display:grid;grid-template-columns:4.2rem 1fr;gap:.8rem;padding:.65rem 0;border-bottom:1px dotted var(--rule)}
+.facts dt{color:var(--muted);font-size:.92rem}
+.facts dd{margin:0;color:var(--ink)}
+.nw{white-space:nowrap}
+
+/* ── 하위 페이지 (글) ── */
+.article{margin-top:2.5rem}
+.article h1{font-family:var(--serif);font-weight:800;color:var(--ink);font-size:clamp(2rem,7vw,3.1rem);line-height:1.2;letter-spacing:-.02em;margin:.2rem 0 .7rem}
+.byline{font-size:.88rem;color:var(--muted);margin:0 0 2rem}
+.article p{margin:0 0 1.15em}
+.article h2{margin-top:2.8rem}
+
+/* 그래프 (모눈종이 위, 빨간 펜 선) */
+.graph{
+  margin:1.6rem 0 1.5rem;padding:1.1rem 1rem .9rem;border:1px solid var(--rule);
+  background-color:#fbfaf5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;background-position:-1px -1px;
+}
+.graph svg{display:block;width:100%;height:auto}
+.graph .ax{font-family:var(--sans);font-size:15px;fill:var(--muted)}
+.graph .hn{font-family:var(--hand);font-size:24px;fill:var(--pen)}
+.graph figcaption{display:flex;flex-wrap:wrap;gap:.3rem 1.3rem;margin-top:.7rem;font-size:.86rem;color:var(--muted)}
+.graph .k{display:inline-block;width:1.5rem;height:0;border-top:2px dashed #a9a297;vertical-align:middle;margin-right:.45rem}
+.graph .k.pen{border-top:2.5px solid var(--pen)}
+.figure-slot{
+  margin:1.6rem 0 2rem;min-height:12rem;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule);color:var(--muted);font-size:.9rem;
+  background-color:#fbfaf5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;background-position:-1px -1px;
+}
+
+/* ── 바닥 ── */
+.foot{margin-top:6rem;border-top:1px solid var(--rule);padding:1.6rem 0 2.6rem;font-size:.88rem;color:var(--muted)}
+.foot .page{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1.5rem}
+
+@media (prefers-reduced-motion:reduce){
+  .circled path{animation:none;stroke-dashoffset:0}
+  .btn{transition:none}
+}
