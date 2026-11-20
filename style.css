@@ -173,7 +173,7 @@ a{color:inherit}
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
   background-size:22px 22px;background-position:-1px -1px;
 }
-.graph svg{display:block;width:100%;height:auto}
+.graph>svg{display:block;width:100%;height:auto}
 .graph .ax{font-family:var(--sans);font-size:15px;fill:var(--muted)}
 .graph .hn{font-family:var(--hand);font-size:24px;fill:var(--pen)}
 .graph figcaption{display:flex;flex-wrap:wrap;gap:.3rem 1.3rem;margin-top:.7rem;font-size:.86rem;color:var(--muted)}
@@ -197,13 +197,22 @@ a{color:inherit}
 .graph .k.box{width:1.15rem;height:.8rem;border-top:0;vertical-align:-1px}
 .graph .k.box.hatch{background:repeating-linear-gradient(135deg,#bdb4a6 0 2px,transparent 2px 5px);box-shadow:inset 0 0 0 1.5px #bdb4a6}
 .graph .k.box.pen{background:var(--pen)}
-.figure-slot{
-  margin:1.6rem 0 2rem;min-height:12rem;display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--rule);color:var(--muted);font-size:.9rem;
-  background-color:#fbfaf5;
-  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-  background-size:22px 22px;background-position:-1px -1px;
-}
+
+/* 비교 그림 (데이터 페이지): 처음 맞히기까지 → 한 번 맞힌 뒤 */
+.cmp-grid{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start;column-gap:1.1rem;padding:.3rem .2rem .1rem}
+.cmp-col{min-width:0}
+.cmp-h{display:block;font-size:.9rem;line-height:1.45;font-weight:700;color:var(--ink)}
+.cmp-avg{display:flex;align-items:baseline;gap:.4rem;margin-top:.8rem}
+.cmp-l{font-size:.82rem;color:var(--muted)}
+.cmp-n{font-family:var(--serif);font-weight:800;color:var(--ink);font-size:clamp(2.3rem,9vw,3.4rem);line-height:1;letter-spacing:-.03em}
+.cmp-n small{font-size:.42em;font-weight:700;letter-spacing:0;margin-left:.06em}
+.cmp-max{display:block;margin-top:.85rem;font-size:.92rem;color:var(--ink-2)}
+.cmp-note{display:block;font-family:var(--hand);color:var(--pen);font-size:1.5rem;line-height:1.1;margin-top:.5rem;transform:rotate(-3deg);transform-origin:left center}
+.cmp-arrow{display:block;width:2.7rem;height:auto;margin-top:3.6rem;overflow:visible}
+.cmp-arrow path{fill:none;stroke:var(--pen);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.cmp figcaption{margin-top:1.1rem}
+@media (max-width:420px){ .cmp-grid{column-gap:.6rem} .cmp-arrow{width:1.9rem} }
+.circled.static path{animation:none;stroke-dashoffset:0}
 
 /* ── 바닥 ── */
 .foot{margin-top:6rem;border-top:1px solid var(--rule);padding:1.6rem 0 2.6rem;font-size:.88rem;color:var(--muted)}
