@@ -211,8 +211,7 @@ a{color:inherit}
 .cmp-l{font-size:.82rem;color:var(--muted)}
 .cmp-n{font-family:var(--serif);font-weight:800;color:var(--ink);font-size:clamp(2.3rem,9vw,3.4rem);line-height:1;letter-spacing:-.03em}
 .cmp-n small{font-size:.42em;font-weight:700;letter-spacing:0;margin-left:.06em}
-.cmp-max{display:block;margin-top:.85rem;font-size:.92rem;color:var(--ink-2)}
-.cmp-note{display:block;font-family:var(--hand);color:var(--pen);font-size:1.5rem;line-height:1.1;margin-top:.5rem;transform:rotate(-3deg);transform-origin:left center}
+.cmp-note{display:block;font-family:var(--hand);color:var(--pen);font-size:1.5rem;line-height:1.1;margin-top:.8rem;transform:rotate(-3deg);transform-origin:left center}
 .cmp-arrow{display:block;width:2.7rem;height:auto;margin-top:3.6rem;overflow:visible}
 .cmp-arrow path{fill:none;stroke:var(--pen);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .cmp figcaption{margin-top:1.1rem}
