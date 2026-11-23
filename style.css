@@ -165,6 +165,12 @@ a{color:inherit}
 .byline{font-size:.88rem;color:var(--muted);margin:0 0 2rem}
 .article p{margin:0 0 1.15em}
 .article h2{margin-top:2.8rem}
+/* 글을 맺는 결론 문장: 제목 서체로 크게, 위에 가는 선 */
+.article .conclusion{
+  margin:3.2rem 0 0;padding-top:2rem;border-top:1px solid var(--rule);
+  font-family:var(--serif);font-weight:700;color:var(--ink);
+  font-size:clamp(1.4rem,4.8vw,1.75rem);line-height:1.5;letter-spacing:-.015em;
+}
 
 /* 그래프 (모눈종이 위, 빨간 펜 선) */
 .graph{
