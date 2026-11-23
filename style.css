@@ -161,8 +161,7 @@ a{color:inherit}
 
 /* ── 하위 페이지 (글) ── */
 .article{margin-top:2.5rem}
-.article h1{font-family:var(--serif);font-weight:800;color:var(--ink);font-size:clamp(2rem,7vw,3.1rem);line-height:1.2;letter-spacing:-.02em;margin:.2rem 0 .7rem}
-.byline{font-size:.88rem;color:var(--muted);margin:0 0 2rem}
+.article h1{font-family:var(--serif);font-weight:800;color:var(--ink);font-size:clamp(2rem,7vw,3.1rem);line-height:1.2;letter-spacing:-.02em;margin:.2rem 0 1.8rem}
 .article p{margin:0 0 1.15em}
 .article h2{margin-top:2.8rem}
 /* 글을 맺는 결론 문장: 제목 서체로 크게, 위에 가는 선 */
